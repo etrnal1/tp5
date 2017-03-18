@@ -1,0 +1,66 @@
+
+<div class="header">
+  <div class="am-g">
+    <h1>Web ide</h1>
+    <p>Integrated Development Environment<br/>代码编辑，代码生成，界面设计，调试，编译</p>
+  </div>
+  <hr />
+</div>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <h3>注册</h3>
+    <hr>
+    <br>
+    <br>
+
+    <form method="post" class="am-form" name="register" action="{:url('index/auth/doRegister')}" onsubmit="return false;">
+      <label for="email">邮箱:</label>
+      <input type="email" name="email" id="email" value="">
+      <br>
+      <label for="username">用户名:</label>
+      <input type="text" name="username" id="username" value="">
+      <br>
+      <label for="password">密码:</label>
+      <input type="password" name="password" id="password" value="">
+      <br>
+      <label for="remember-me">
+        <input id="remember-me" type="checkbox">
+        记住密码
+      </label>
+      <br />
+      <div class="am-cf">
+        <input type="submit" name="sub" value="登 录" id="login" class="am-btn am-btn-primary am-btn-sm am-fl">
+        <input type="submit" name="" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
+      </div>
+    </form>
+    <hr>
+    <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="__STATIC_URL__/amaze/js/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $('#login').click(function(){
+      var email = $('input[name=email]').val();
+      var username = $('input[name=username]').val();
+      var password = $('input[name=password]').val();
+      var params = {
+        email: email,
+        username: username,
+        password: password
+      };
+      $.post($('form').attr('action'), params, function(data){
+        if(data.status){
+          alert('注册成功！');
+          setTimeout(function(){
+              location.href = '{:url("/index/index/index")}';
+          }, 3000);
+        }else{
+          alert(data.msg);
+        }
+      }, 'JSON');
+
+  });
+</script>
